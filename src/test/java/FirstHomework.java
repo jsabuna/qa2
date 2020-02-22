@@ -2,6 +2,9 @@ import org.junit.jupiter.api.Test;
 
 import java.text.DateFormatSymbols;
 
+import java.lang.Math;
+
+
 public class FirstHomework {
     @Test
     public void firstHomework() {
@@ -9,7 +12,6 @@ public class FirstHomework {
         priceForFuel(20, 200);
         personalCode(24, 4, 1990);
         calculateDistance(52.76, 1.19, 52.76, 1.20);
-
     }
 
     public void carAdvertisement(String carMake, String mileage, String price) {
@@ -35,17 +37,18 @@ public class FirstHomework {
 
     }
 
-    public void calculateDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
-        int scale = 200;
-        double distanceX = 0;
-        double distanceY = 0;
-        distanceX = longitude2 - longitude1;
-        distanceY = latitude2 - latitude1;
-        distanceX = distanceX * scale;
-        distanceY = distanceY * scale;
-        System.out.println("The X distance is:" + Double.toString(distanceX) );
-        System.out.println("The Y distance is:" + Double.toString(distanceY));
-
+    private void calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        if (((lat1 == lat2) && (lon1 == lon2))) {
+            System.out.println("The distance equals 0");
+        } else {
+            double theta = lon1 - lon2;
+            double distance = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
+            distance = Math.acos(distance);
+            distance = Math.toDegrees(distance);
+            distance = distance * 60 * 1.1515;
+            distance = distance * 1.609344;
+            System.out.printf("The distance equals:%.5f km", distance);
+        }
     }
 }
 

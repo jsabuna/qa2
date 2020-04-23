@@ -28,7 +28,7 @@ public class BaseFunc {
     }
 
     public List<WebElement> findElements (By locator) {
-        //List<WebElement>
+        //
         return driver.findElements(locator);
     }
 

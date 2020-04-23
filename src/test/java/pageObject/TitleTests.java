@@ -24,7 +24,9 @@ public class TitleTests {
         String articlePageTitle = articlePage.getTitle();
         System.out.println(articlePageTitle);
 
-        //Assertions.assertEquals(homePageTitle, articlePageTitle, "Titles are not equal");
-    }
+        HomePageComments homePageComments = new HomePageComments(baseFunc);
+        homePageComments.clickOnCommentsCount();
+        String commentsPageTitle = homePageComments.getCommentsPageTitle();
 
+        //Assertions.assertEquals(homePageTitle, articlePageTitle, "Titles are not equal");
 }

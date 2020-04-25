@@ -19,7 +19,7 @@ public class BaseFunc {
         System.setProperty("webdriver.chrome.driver", "c:/Users/Sergei/Desktop/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 10);
 
         if (!url.startsWith("http://")) {
             url = "http://" + url;
@@ -33,12 +33,12 @@ public class BaseFunc {
     }
 
     public WebElement findElement(By locator) {
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return driver.findElement(locator);
     }
 
     public void click(WebElement webElement) {
-       // wait.until(ExpectedConditions.elementToBeClickable(webElement));
+       wait.until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.click();
 
     }

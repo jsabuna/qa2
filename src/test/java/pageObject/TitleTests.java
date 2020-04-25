@@ -17,16 +17,19 @@ public class TitleTests {
 
         HomePage homePage = new HomePage(baseFunc);
         String homePageTitle = homePage.getTitleById(2);
-        System.out.println(homePageTitle);
+        System.out.println(homePageTitle + ".");
         homePage.goToArticleById(2);
 
         ArticlePage articlePage = new ArticlePage(baseFunc);
         String articlePageTitle = articlePage.getTitle();
-        System.out.println(articlePageTitle);
+        System.out.println(articlePageTitle + ".");
 
         HomePageComments homePageComments = new HomePageComments(baseFunc);
         homePageComments.clickOnCommentsCount();
         String commentsPageTitle = homePageComments.getCommentsPageTitle();
+        System.out.println(commentsPageTitle + ".");
 
-        //Assertions.assertEquals(homePageTitle, articlePageTitle, "Titles are not equal");
+        Assertions.assertEquals(homePageTitle, articlePageTitle, "Titles 1 and 2 are not equal");
+        Assertions.assertEquals(articlePageTitle, commentsPageTitle, "Titles 2 and 3 are not equal");
+    }
 }

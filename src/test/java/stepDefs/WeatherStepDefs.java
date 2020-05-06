@@ -5,9 +5,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.Response;
+import model.Weather;
 import org.junit.jupiter.api.Assertions;
 import requesters.WeatherRequester;
 import sun.rmi.server.WeakClassHashMap;
+
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WeatherStepDefs {
     private String cityName;
@@ -41,11 +46,27 @@ public class WeatherStepDefs {
 
     @Then("lon is {float}")
     public void check_lon(float lon) {
-        Assertions.assertEquals(lon, response.getCoord().getLon(), "Wrong lon");
+        assertEquals(lon, response.getCoord().getLon(), "Wrong lon");
     }
 
     @Then("lat is {float}")
     public void check_lat(float lat) {
-        Assertions.assertEquals(lat, response.getCoord().getLat(), "Wrong lat");
+        assertEquals(lat, response.getCoord().getLat(), "Wrong lat");
     }
+
+    @Then("weather is:")
+    public void check_weather(Map<String, String> params) {
+        Weather weather = response.getWeathers().get(0);
+
+        assertEquals(Long.parseLong(params.get("id")), weather.getId(), "Wrong weather ID");
+        assertEquals(params.get("main"), weather.getMain(), "Wrong Main info");
+        assertEquals(params.get("description"), weather.getDescription(), "Wrong weather Description");
+        assertEquals(params.get("icon"), weather.getIcon(), "Wrong weather Icon");
+    }
+
+    @Then("base is: {string}")
+    public void check_base (String base) {
+        assertEquals(base, response.getBase(), "Wrong base");
+    }
+
 }
